@@ -50,7 +50,50 @@
             </div>
         </div>
     </div>
-    
+
+    <div class="col-sm-6 col-sm-offset-3">  
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+            <h3 class="panel-title">Comments</h3>
+            </div>
+            <div class="panel-body">
+              <form role="form" action="<?php $_ENV['PHP_SELF']; ?>" method="post"> 
+                <div class="form-group">
+                  <input name="comment" type="text" class="form-control" id="comment" placeholder="Comment" value="">
+                </div>
+                <div class="form-group">
+                  <button name="submit" value=true type="submit" class="btn btn-primary pull-right">Post</button>
+                </div>
+              </form>
+            </div>
+
+            <?php
+              require_once("config.php");
+
+              $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8";
+              $opt = [
+                  PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                  PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                  PDO::ATTR_EMULATE_PREPARES   => false,
+              ];
+              $pdo = new PDO($dsn, DB_USER, DB_PASSWORD, $opt);
+
+              // if(isset($_POST['comment'])) {
+              //   $query = $pdo->query('INSERT INTO comment VALUES (NULL, :comment)');
+              //   $query->execute(['comment' => $_POST['comment']]);
+              // }
+
+              $stmt = $pdo->query('SELECT comment FROM comment');
+              foreach ($stmt as $row) {
+                  print('
+            <div class="panel-body">
+              <p>' . $row['comment'] . '</p>
+            </div>');
+              }
+            ?>
+        </div>
+    </div>
+
     <footer class="footer">
       <div class="container">
         <span class="text-muted">&copy; IQ Business 2017.</span>
