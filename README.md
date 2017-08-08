@@ -3,11 +3,11 @@ Web security master class resources.
 
 ## Requirements
 
-To run this demo you'll need a LAMP stack with an Apache 2 webserver, PHP 5 (not PHP 7 as it depricates some of the things we want to show) and a MySQL 5 database server.
+To run this demo you'll need a LAMP stack with an Apache 2 webserver, PHP 5 (not PHP 7 as it deprecates some of the things we want to demo) and a MySQL 5 database server.
 
 ## Setup Guide
 
-1. Create a config.php in the root directory (your might be /var/www/html) and add the following 
+1. Create a config.php in the root directory of your webserver (yours might be /var/www/html) and add the following :
 
 ```css
 <?php
@@ -24,3 +24,4 @@ resources/iq-defcon-schema.sql
 ```
 
 3. Enjoy!
+
