@@ -25,4 +25,5 @@ if($value) {
     header('Location: forbidden.html');
 }
 
-// file_put_contents('query.log', $query . PHP_EOL, FILE_APPEND); 
+// file_put_contents('query.log', date('Y-m-dTH:i:s.u') . " " . $query . PHP_EOL, FILE_APPEND); 
+

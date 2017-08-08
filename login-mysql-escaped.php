@@ -16,14 +16,19 @@ $result = mysql_query($query);
 $value = mysql_result($result, 0);
 
 if($value) {
-    header('Location: comments.php');
+    // Get the user id
+    $query = 'SELECT id FROM user WHERE username = \'' . $username . '\';';
+    $result = mysql_query($query);
+    $id = mysql_result($result, 0);
+    
+    header('Location: comments.php?id=' . intval($id));
 } else {
     header('Location: forbidden.html');
 }
 
 $password = $_POST['password'];
 
-file_put_contents('query.log', $query . PHP_EOL, FILE_APPEND); 
+file_put_contents('query.log', date('Y-m-dTH:i:s.u') . " " . $query . PHP_EOL, FILE_APPEND); 
 
 mysql_free_result($result);
 mysql_close($link);

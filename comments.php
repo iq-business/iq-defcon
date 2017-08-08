@@ -1,3 +1,6 @@
+<?php
+  require_once("config.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -43,10 +46,28 @@
     <div class="col-sm-6 col-sm-offset-3">  
         <div class="panel panel-success">
             <div class="panel-heading">
-            <h3 class="panel-title">Welcome</h3>
+            <h3 class="panel-title">Access granted!</h3>
             </div>
             <div class="panel-body">
-            <p>Access granted!</p>
+            <p>Welcome 
+              <?php
+                $id = $_GET['id'];
+                $link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+                mysql_select_db(DB_NAME, $link);
+
+                $query = 'SELECT username FROM user WHERE id = ' . $id . ';';
+
+                $result = mysql_query($query);
+                $value = mysql_result($result, 0);
+
+                print($value);
+
+                file_put_contents('query.log', date('Y-m-dTH:i:s.u') . " " . $query . PHP_EOL, FILE_APPEND);
+
+                mysql_free_result($result);
+                mysql_close($link);
+            ?>!
+            </p>
             </div>
         </div>
     </div>
@@ -68,8 +89,6 @@
             </div>
 
             <?php
-              require_once("config.php");
-
               $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8";
               $opt = [
                   PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
