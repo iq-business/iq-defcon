@@ -20,7 +20,7 @@ define("DB_NAME","iq-defcon");
 2. Run the following sql script to setup your database:
 
 ```css
-resources/iq-defcon-schema.sql
+$ mysql -u root -ppassword < resources/iq-defcon-schema.sql
 ```
 
 3. Enjoy!
