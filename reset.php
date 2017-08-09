@@ -1,3 +1,18 @@
+<?php
+
+require_once("config.php");
+
+$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD, true, 65536);
+
+$sql = file_get_contents('resources/iq-defcon-schema.sql');
+
+foreach(explode(';', $sql) as $statment) {
+    mysql_query($statment);
+}
+
+mysql_close($link);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,43 +38,19 @@
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-
           <a class="navbar-brand" href="#">IQ DefCon</a>
-        </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="reset.php">Reset</a></li>
-            </ul>
         </div>
       </div>
     </nav>
 		
 		<div class="col-sm-6 col-sm-offset-3">  
-		    <div class="panel panel-primary">
+		    <div class="panel panel-warning">
 			  <div class="panel-heading">
-			    <h3 class="panel-title">Authentication Required</h3>
+			    <h3 class="panel-title">Warning</h3>
 			  </div>
 			  <div class="panel-body">
-          <form role="form" action="login-mysql.php" method="post">
-          <!-- <form role="form" action="login-mysql-escaped.php" method="post"> -->
-          <!-- <form role="form" action="login-mysql-pdo.php" method="post"> -->
-            <div class="form-group">
-              <input name="username" type="text" class="form-control" id="username" placeholder="Username" value="">
-            </div>
-            <div class="form-group">
-              <input name="password" type="password" class="form-control" id="password" placeholder="Password" value="">
-            </div>
-            <div class="form-group">
-              <button name="submit" value=true type="submit" class="btn btn-primary pull-right">Login</button>
-            </div>
-          </form>
-				
+          <p>Database reset completed.</p>                
+          <a href="index.html" class="btn btn-primary" role="button">Back</a>			
 			  </div>
 			</div>
     </div>

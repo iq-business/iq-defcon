@@ -39,6 +39,9 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="index.html">Logout</a></li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="reset.php">Reset</a></li>
+            </ul>
         </div>
       </div>
     </nav>
@@ -87,6 +90,7 @@
                 </div>
               </form>
             </div>
+            <div class="panel-body">
 
             <?php
               $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8";
@@ -97,27 +101,30 @@
               ];
               $pdo = new PDO($dsn, DB_USER, DB_PASSWORD, $opt);
 
-              // if(isset($_POST['comment'])) {
-              //   $query = $pdo->query('INSERT INTO comment VALUES (NULL, :comment)');
-              //   $query->execute(['comment' => $_POST['comment']]);
-              // }
+              if(isset($_POST['comment'])) {
+                $comment = $_POST['comment'];
+                //$comment = htmlspecialchars($_POST['comment']);
+                
+                $insert = $pdo->prepare('INSERT INTO comment VALUES (NULL, :comment)');
+                $insert->execute(['comment' => $comment]);
+              }
 
               $stmt = $pdo->query('SELECT comment FROM comment');
               foreach ($stmt as $row) {
+                  $comment = $row['comment'];
+                  // $comment = htmlspecialchars($row['comment']);
                   print('
-            <div class="panel-body">
-              <p>' . $row['comment'] . '</p>
+            <div class="panel panel-primary">
+              <div class="panel-body">
+                <p>' . $comment . '</p>
+              </div>
             </div>');
               }
-            ?>
+
+          ?>
+          </div>
         </div>
     </div>
-
-    <footer class="footer">
-      <div class="container">
-        <span class="text-muted">&copy; IQ Business 2017.</span>
-      </div>
-    </footer>
 		
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
