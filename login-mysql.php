@@ -5,7 +5,7 @@ $link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 mysql_select_db(DB_NAME, $link);
 
 // Check if username and password match anything in the database
-$query = 'SELECT COUNT(*) FROM user WHERE username = \'' . $_POST['username'] . '\' AND password = \'' . $_POST['password'] . '\';';
+$query = 'SELECT 1 FROM user WHERE username = \'' . $_POST['username'] . '\' AND password = \'' . $_POST['password'] . '\';';
 
 $result = mysql_query($query);
 $value = mysql_result($result, 0);

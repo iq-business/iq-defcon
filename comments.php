@@ -78,7 +78,7 @@
             <h3 class="panel-title">Comments</h3>
             </div>
             <div class="panel-body">
-              <form role="form" action="<?php print($_SERVER['PHP_SELF']); ?>" method="post"> 
+              <form role="form" action="<?php print($_SERVER['PHP_SELF'] . '?id=' . $_GET['id']); ?>" method="post"> 
                 <div class="form-group">
                   <input name="comment" type="text" class="form-control" id="comment" placeholder="Comment" value="">
                 </div>
